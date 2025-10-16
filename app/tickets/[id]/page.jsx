@@ -15,6 +15,7 @@ export const generateStaticParams = async () => {
 
 // Get/fetch one single ticket
 const getTicket = async (id) => {
+
 	const res = await fetch(`http://localhost:8080/tickets/${id}`, {
 		next: { revalidate: 60 }
 	});

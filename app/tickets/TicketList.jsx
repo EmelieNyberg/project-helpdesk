@@ -1,6 +1,10 @@
 import Link from "next/link";
 
 const getTickets = async () => {
+
+  // imitate delay to be able to show Loading message
+  await new Promise(resolve => setTimeout(resolve, 3000));
+
   const res = await fetch('http://localhost:8080/tickets', {
     next: {
       revalidate: 0 // use 0 to opt out using cache
