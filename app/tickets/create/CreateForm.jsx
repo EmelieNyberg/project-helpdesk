@@ -13,12 +13,33 @@ const CreateForm = () => {
 	const [isLoading, setIsLoading] = useState(false);
 
 	// Started with the handle submit function
-	const handleSubmit = async () => {
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		setIsLoading(true);
 
+		const ticket = {
+			title,
+			body,
+			user_email: email,
+			priority
+		};
+
+		const res = await fetch('http://localhost:8080/tickets', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(ticket)
+		});
+
+		if (res.status === 201) {
+			router.refresh();
+			router.push('/tickets');
+		}
 	};
 
 	return (
-		<form className="w-1/2">
+		<form onSubmit={handleSubmit} className="w-1/2">
 			<label>
 				<span>Title:</span>
 				<input
